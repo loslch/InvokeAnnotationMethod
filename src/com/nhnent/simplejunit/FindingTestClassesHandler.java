@@ -18,8 +18,7 @@ public class FindingTestClassesHandler {
 		List<Class> clazzes = new LinkedList<Class>();
 
 		if (path.endsWith(TEST_CLASS_SUFFIX)) {
-			String clazz = path.
-					replace(CLASS_SUFFIX, "");
+			String clazz = path.replace(CLASS_SUFFIX, "");
 			clazzes.add(Class.forName(clazz));
 		} else if (isPackage(path)) {
 			File file = getFileFromPath(path);
@@ -32,8 +31,7 @@ public class FindingTestClassesHandler {
 	}
 
 	private static File getFileFromPath(final String path) throws IOException {
-		ClassLoader classLoader = Thread.currentThread()
-				.getContextClassLoader();
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		String scannedPath = path.replace(DOT, SLASH);
 		Enumeration<URL> resources = classLoader.getResources(scannedPath);
 
