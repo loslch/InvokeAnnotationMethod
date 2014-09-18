@@ -26,7 +26,8 @@ public class SimpleJUnit {
 			if(method.getAnnotation(SimpleJUnitTest.class) != null){
 				try {
 					method.invoke(method.getDeclaringClass().newInstance());
-				} catch (Exception e) {
+				} catch (Throwable e) {
+					//TODO: Exception
 					e.printStackTrace();
 				}
 			}
