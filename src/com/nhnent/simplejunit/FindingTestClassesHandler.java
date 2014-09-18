@@ -13,20 +13,21 @@ public class FindingTestClassesHandler {
 	private final static String TEST_CLASS_SUFFIX = "Test.class";
 	private final static String CLASS_SUFFIX = ".class";
 
-	final static List<Class> find(final String path) throws IOException, ClassNotFoundException {
-		List<Class> classes = new LinkedList<Class>();
+	final static List<Class> find(final String path) throws IOException,
+			ClassNotFoundException {
+		List<Class> clazzes = new LinkedList<Class>();
 
 		if (path.endsWith(TEST_CLASS_SUFFIX)) {
-			String className = path.replace(CLASS_SUFFIX, "");
-			classes.add(Class.forName(className));
+			String clazz = path.replace(CLASS_SUFFIX, "");
+			clazzes.add(Class.forName(clazz));
 		} else if (isPackage(path)) {
 			File file = getFileFromPath(path);
 			for (File nestedFile : file.listFiles()) {
-				classes.addAll(find(path + DOT + nestedFile.getName()));
+				clazzes.addAll(find(path + DOT + nestedFile.getName()));
 			}
 		}
 
-		return classes;
+		return clazzes;
 	}
 
 	private static File getFileFromPath(final String path) throws IOException {
@@ -40,5 +41,4 @@ public class FindingTestClassesHandler {
 	private static boolean isPackage(final String path) {
 		return !path.endsWith(CLASS_SUFFIX);
 	}
-
 }

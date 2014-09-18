@@ -8,7 +8,7 @@ import java.util.List;
 import com.nhnent.annotation.SimpleJUnitTest;
 
 public class SimpleJUnit {
-	private static Class testClass = SimpleJUnitTest.class;
+	private static Class testClazz = SimpleJUnitTest.class;
 	
 	public static void start(String packageName) throws ClassNotFoundException, IOException {
 		findTestClass(FindingTestClassesHandler.find(packageName));
