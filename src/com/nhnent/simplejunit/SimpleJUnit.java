@@ -17,11 +17,11 @@ public class SimpleJUnit {
 
 	private static void findTestClass(List<Class> clazzList) {
 		for (Class clazz : clazzList) {
-			findTestMethods(clazz.getMethods());
+			findAndRunTestMethods(clazz.getMethods());
 		}
 	}
 
-	private static void findTestMethods(Method[] methods) {
+	private static void findAndRunTestMethods(Method[] methods) {
 		for (Method method : methods) {
 			if(method.getAnnotation(SimpleJUnitTest.class) != null){
 				try {
