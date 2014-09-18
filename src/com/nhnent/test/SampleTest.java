@@ -5,16 +5,16 @@ import com.nhnent.annotation.SimpleJUnitTest;
 public class SampleTest {
 
 	@SimpleJUnitTest
-	public void methodTest1() {
-		System.out.println("1번 테스트");
+	public void method1() {
+		System.out.println("com.nhnent.test.SampleTest.method1() is called.");
 	}
 
-	public void methodTest2() {
-		System.out.println("2번 테스트");
+	public void method2() {
+		System.out.println("com.nhnent.test.SampleTest.method2() is called.");
 	}
 
 	@SimpleJUnitTest
-	public void methodTest3() {
-		System.out.println("3번 테스트");
+	public void method3() {
+		System.out.println("com.nhnent.test.SampleTest.method3() is called.");
 	}
 }
