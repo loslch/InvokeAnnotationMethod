@@ -13,41 +13,34 @@ public class FindingTestClassesHandler {
 	private final static String TEST_CLASS_SUFFIX = "Test.class";
 	private final static String CLASS_SUFFIX = ".class";
 
-	final static List<Class> find(final String scannedPackage)
-			throws IOException, ClassNotFoundException {
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	final static List<Class> find(final String path) throws IOException,
+			ClassNotFoundException {
+		List<Class> clazzes = new LinkedList<Class>();
 
-		String scannedPath = scannedPackage.replace(DOT, SLASH);
-		Enumeration<URL> resources = classLoader.getResources(scannedPath);
-
-		List<Class> classes = new LinkedList<Class>();
-		File file = new File(resources.nextElement().getFile());
-
-		classes.addAll(find(file, scannedPackage));
-
-		return classes;
-	}
-
-	private final static List<Class> find(final File file,
-			final String scannedPackage) throws ClassNotFoundException {
-
-		List<Class> classes = new LinkedList<Class>();
-		for (File nestedFile : file.listFiles()) {
-			
-			String resource = scannedPackage + DOT + nestedFile.getName();
-		
-			if (nestedFile.isDirectory()) {
-				classes.addAll(find(nestedFile, resource));
-			} else if (resource.endsWith(TEST_CLASS_SUFFIX)) {
-				int beginIndex = 0;
-				int endIndex = resource.length() - CLASS_SUFFIX.length();
-				String className = resource.substring(beginIndex, endIndex);
-				classes.add(Class.forName(className));
+		if (path.endsWith(TEST_CLASS_SUFFIX)) {
+			String clazz = path.
+					replace(CLASS_SUFFIX, "");
+			clazzes.add(Class.forName(clazz));
+		} else if (isPackage(path)) {
+			File file = getFileFromPath(path);
+			for (File nestedFile : file.listFiles()) {
+				clazzes.addAll(find(path + DOT + nestedFile.getName()));
 			}
-			
 		}
 
-		return classes;
+		return clazzes;
 	}
 
+	private static File getFileFromPath(final String path) throws IOException {
+		ClassLoader classLoader = Thread.currentThread()
+				.getContextClassLoader();
+		String scannedPath = path.replace(DOT, SLASH);
+		Enumeration<URL> resources = classLoader.getResources(scannedPath);
+
+		return new File(resources.nextElement().getFile());
+	}
+
+	private static boolean isPackage(final String path) {
+		return !path.endsWith(CLASS_SUFFIX);
+	}
 }
