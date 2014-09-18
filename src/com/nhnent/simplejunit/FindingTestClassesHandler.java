@@ -25,7 +25,7 @@ public class FindingTestClassesHandler {
 				classes.addAll(find(path + DOT + nestedFile.getName()));
 			}
 		}
-		
+
 		return classes;
 	}
 

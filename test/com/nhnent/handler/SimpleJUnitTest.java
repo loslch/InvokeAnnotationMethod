@@ -9,7 +9,7 @@ import com.nhnent.simplejunit.SimpleJUnit;
 public class SimpleJUnitTest {
 	
 	@Test
-	public void SimpleJunitTest() throws ClassNotFoundException, IOException {
+	public void Run() throws ClassNotFoundException, IOException {
 		SimpleJUnit.start("com.nhnent.test");
 	}
 }
